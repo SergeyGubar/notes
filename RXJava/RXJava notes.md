@@ -59,3 +59,79 @@ interface UserManager {
 }
 ```
 
+#### Creating sources of data
+
+All types of sources have static methods:
+
+```kotlin
+Flowable.just("Hello")
+Observable.just("Hello")
+Maybe.just()
+Single.just()
+
+Observable.fromArray()
+Observable.fromIterable()
+
+// Example with calling some hyphotetical http client
+Observable.fromCallable(() -> client.request().response)
+// If we don't want to return any value
+Maybe.fromAction(() -> sout("hello")) 
+Maybe.fromRunnable(() -> sout("hello"))
+
+Observable.create(e -> { // e is ObservableEmmiter, lambda is subscribe() method
+  e.onNext("Hello")
+  e.onNext("Hello")
+  e.OnComplete()
+})
+// So now we can model async work
+
+Observable.create(e -> {
+  client.newCall(request).enqueue(Callback() {
+    override fun onResponse(r: Response) {
+      e.onNext(r.body().toString())
+      e.onComplete()
+    }
+    override fun onFailure(ex: Exception) {
+      e.onError(ex)
+    }
+  })
+})
+```
+
+#### Observing sources of data
+
+```kotlin
+val observable = Observable.just("Hello")
+// instead of DisposableObserver could be DisposableMaybeObserver etc
+val disposable: Disposable = observable.subscribeWith(DisposableObserver<String>(){
+  override fun onNext(s: String)
+  override fun onComplete()
+  override fun onError(t: Throwable)
+})
+disposable.dispose()
+
+// use CompositeDisposable for multiple disposables
+```
+
+#### Operators
+
+````kotlin
+// bg thread
+val user: Observable<User> = um.getUser()
+// ui thread
+val mainThreadUser: Observable<User> = user.observeOn(AndroidSchedulers.mainThread())
+
+// subscribeOn - operator, ensures that Observable works on bg thread (Schedulers.io is just a thread pool)
+// observe the result on main thread, and map response to String
+val response: Observable<String> = Observable.fromCallable(() -> {
+  return client.newCall(request).execute()
+}).subscribeOn(Schedulers.io())
+  // we call map before observe, because we want our subscribers to receive String, not Response
+  .map(response -> response.body().toString)  
+  .observeOn(AndroidSchedulers.mainThread())
+  
+observable.first() // return Single
+observable.firstElement() // return Maybe
+
+````
+
