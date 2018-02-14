@@ -39,3 +39,38 @@ Operators:
 Priority:
 
 All operators have priority in range 0..9. Any function has priority 10
+
+```haskell
+-- Left associative operators (value is calculated from left to right):
+infixl 6 +, - 
+-- Right associative
+infixr 8 ^, `logBase` -- 2 ^ 3 ^ 2 = 512, but not 64 (from right to left)
+```
+
+Custom operator
+
+```haskell
+infixl 6 *+*
+a *+* b = a ^ 2 + b ^ 2 
+-- or
+(*+*) a b = a ^ 2 + b ^ 2
+-- there is no difference in usage, after we define the operator (we can use it both in functional and operator way)
+```
+
+Operators conjunction
+
+```haskell
+(/) 2 == (2 /)
+(2 / ) 4 = 0.5
+(/ 2) 4 = 2
+-- NOTE: it works only for operators, functions can not be curried from right to left
+```
+
+Remove unnecessary brackets:
+
+```haskell
+f $ x = f x
+sin 0 == sin $ 0 
+sin (pi / 2) == sin $ pi / 2
+```
+
