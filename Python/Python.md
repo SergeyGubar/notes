@@ -204,9 +204,13 @@ Used for building both scatter and plot graphics
 import matplotlib.pyplot as plt
 plt.plot(list_1, list_2) # list_1 on x axis and list_2 on y
 plt.show() # result - line plot
+plt.clf()
 plt.scatter(list-1, list_2) 
 plt.xscale("log") # change x axis scaling for large numbers 
 plt.show() # result - scatter plot with points, not connected with lines
+plt.clear()
+
+plt.hist(np_array_1, bins=3) # create a histogram
 ```
 
 
