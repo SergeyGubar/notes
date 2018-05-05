@@ -27,8 +27,6 @@ Formatted output (printf equivalent)
 print("%s: %d %d %d %d %d" % (key, wins[key] + loses[key] + draw[key], wins[key], draw[key], 		loses[key], scores[key]))
 ```
 
-
-
 #### Data types
 
 1. **Booleans** are either True or False.
@@ -93,8 +91,6 @@ a_list.pop() # returns 1
 # [(1, 3), (1, 4), (2, 3), (2, 1), (2, 4), (3, 1), (3, 4)] (Cartesian product)
 ```
 
-
-
 ####Tuples
 
 A tuple is an **immutable** list. A tuple can not be changed in any way once it is created.
@@ -156,7 +152,7 @@ len(SUFFIXES) # 2
 SUFFIXES[1000] # ['KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
 ```
 
-####Files
+#### Files
 
 ```python
 # with automatically closes file for you
