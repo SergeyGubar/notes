@@ -42,7 +42,7 @@ print("%s: %d %d %d %d %d" % (key, wins[key] + loses[key] + draw[key], wins[key]
 
 Data types are converted between each other with functions like int(), str(), float() etc.
 
-####Lists
+#### Lists
 
 ```python
 # creating a list
@@ -91,7 +91,7 @@ a_list.pop() # returns 1
 # [(1, 3), (1, 4), (2, 3), (2, 1), (2, 4), (3, 1), (3, 4)] (Cartesian product)
 ```
 
-####Tuples
+#### Tuples
 
 A tuple is an **immutable** list. A tuple can not be changed in any way once it is created.
 
@@ -112,7 +112,7 @@ TUESDAY # 1
 1. Tuples are faster than lists. If you’re defining a constant set of values and all you’re ever going to do with it is iterate through it, use a tuple instead of a list.
 2. Some tuples can be used as dictionary keys (specifically, tuples that contain immutable values like strings ,numbers, and other tuples). Lists can never be used as dictionary keys, because lists are not immutable.
 
-####Sets
+#### Sets
 
 A set is an **unordered “bag”** of unique values. A single set can contain values of any immutable datatype.
 Once you have two sets, you can do standard set operations like union, intersection, and set difference.
@@ -142,7 +142,7 @@ result = a_set.issubset(b_set) # True
 result = b_set.issuperset(a_set) # True
 ```
 
-####Dictionaries
+#### Dictionaries
 
 ```python
 SUFFIXES = {1000: ['KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
