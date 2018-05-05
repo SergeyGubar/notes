@@ -205,13 +205,45 @@ import matplotlib.pyplot as plt
 plt.plot(list_1, list_2) # list_1 on x axis and list_2 on y
 plt.show() # result - line plot
 plt.clf()
-plt.scatter(list-1, list_2) 
+plt.scatter(list-1, list_2, s = np_array_1, c = np_array_2, alpha = 0.8) # s stays here for scaling list (coefficients), c - for colors, alpha - for opacity
+
 plt.xscale("log") # change x axis scaling for large numbers 
 plt.show() # result - scatter plot with points, not connected with lines
 plt.clear()
 
 plt.hist(np_array_1, bins=3) # create a histogram
+plt.clear()
+
+plt.fill_between() # a line plot, where the area under the graph is colored
+plt.xlabel("x-axis title") # sign axis
+plt.ylabel("y-axis title")
+plt.title("Awesome plot") # title our plot
+plt.yticks([0,1,2], ["one","two","three"]) # control y-axis and some friendly names
+plt.grid(True) # add grids
 ```
 
+https://matplotlib.org/1.5.1/gallery.html - big collection of plot examples
 
+#### Pandas
+
+Pandas is a high level data manipulation tool. In pandas we store data in so-called dataframe. 
+
+![dataframe](Pics/dataframe.png)
+
+Data is imported to dataframe typically from the CSV file:
+
+```python
+import pandas as pd
+data = pd.read_csv("data.csv", index_col=0) # index_col used for telling that our first row contains indexes
+data["columnname"] # returns data for specific column
+data.columnname # the same
+data["nextcolumn"] = ["a", "b", "c"] # add column
+data["nextcolumn2"] = data["columnname"] + data["nextcolumn"] * 2 # add column based on other columns
+data.loc[1] # take the row indexed 1
+
+data.loc["key"] # take the row with index "key"
+data.loc["key"]["columnname"] # take the concrete value for this row (one cell)
+data.loc["key"]["columnname"] # similar to previous
+
+```
 
