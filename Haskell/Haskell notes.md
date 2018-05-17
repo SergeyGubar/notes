@@ -74,3 +74,11 @@ sin 0 == sin $ 0
 sin (pi / 2) == sin $ pi / 2
 ```
 
+Types:
+
+``` 
+:type 'c' -- 'c' :: Char
+:type 3 -- 3 :: Num a => a 
+:type 3.5 -- :: Fractional a => 
+```
+
