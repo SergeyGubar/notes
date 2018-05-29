@@ -32,7 +32,7 @@ print("%s: %d %d %d %d %d" % (key, wins[key] + loses[key] + draw[key], wins[key]
 1. **Booleans** are either True or False.
 
 2. **Numbers** can be integers (1 and 2), floats (1.1 and 1.2), fractions (1/2 and 2/3), or even complex
-  numbers.
+    numbers.
 3. **Strings** are sequences of Unicode characters, e.g. an H T M L document.
 4. **Bytes ** and byte arrays, e.g. a J P E G image file.
 5. **Lists** are ordered sequences of values.
@@ -222,7 +222,7 @@ https://matplotlib.org/1.5.1/gallery.html - big collection of plot examples
 
 #### Pandas
 
-Pandas is a high level data manipulation tool. In pandas we store data in so-called dataframe. 
+Pandas is a high level data manipulation tool. In pandas we store data in so-called dataframe (or series which is 1d equivalent). Below is shown typical dataframe example:
 
 ![dataframe](Pics/dataframe.png)
 
@@ -232,6 +232,7 @@ Data is imported to dataframe typically from the CSV file:
 import pandas as pd
 data = pd.read_csv("data.csv", index_col=0) # index_col used for telling that our first row contains indexes
 data["columnname"] # returns data for specific column
+data[3] # select data by the index value
 data.columnname # the same
 data["nextcolumn"] = ["a", "b", "c"] # add column
 data["nextcolumn2"] = data["columnname"] + data["nextcolumn"] * 2 # add column based on other columns
@@ -242,4 +243,60 @@ data.loc["key"]["columnname"] # take the concrete value for this row (one cell)
 data.loc["key"]["columnname"] # similar to previous
 
 ```
+
+Another ways of creating dataframe and it's methods:
+
+DataFrames can be created from lists, dictionaries, and Pandas Series.
+
+```python
+step_data = [3620, 7891, 9761, 3907, 4338, 5373]
+cycling_data = [10.7, 0, None, 2.4, 15.3, 10.9, 0, None]
+joined_data = list(zip(step_data, cycling_data)) # create a list of tuples
+activity_df = pd.DataFrame(joined_data) # now we have fancy dataframe (each tuple stands for a row now)
+
+```
+
+Using date range indexes
+
+```python
+# 1d arrays (vectors) are called Series, not Dataframes
+step_counts = pd.Series(step_data,name='steps')
+step_counts.index = pd.date_range('20150329’,periods=6)
+
+print(step_counts[3])
+print(step_counts['2015-03-29'])
+# Select all of April
+print(step_counts['2015-04'])
+
+```
+
+![date-range-indexes](/home/sergey/Pictures/date_inexes_example.png)
+
+**Data types and imputation**
+
+```python
+print(step_counts.dtypes) # int64
+step_counts = step_counts.astype(np.float)
+print(step_counts.dtypes) # float64
+print(step_counts) # the same data frame as shown in the screenshot above, but all values now are floats (e.g 3620 -> 3620.0)
+```
+
+Processing invalid data:
+
+```python
+step_counts[1:3] = np.NaN # indexes 1 and 2 are NaN now
+step_counts = step_counts.fillna(0.) # replace invalid data with 0.0
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
